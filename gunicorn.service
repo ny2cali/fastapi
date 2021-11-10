@@ -1,0 +1,14 @@
+[Unit]
+Description=demo fastapi application
+After=network.target
+
+[Service]
+User=ny2cali
+Group=ny2cali
+WorkingDirectory=/home/ny2cali/app/src/
+Environment="PATH=/home/ny2cali/app/venv/bin"
+EnvironmentFile=/home/ny2cali/.env
+ExecStart=/home/ny2cali/app/venv/bin/gunicorn -w 4 -k uvicorn.workers.UvicornWorker app.main:app --bind 0.0.0.0:8000
+
+[Install]
+WantedBy=multi-user.target
